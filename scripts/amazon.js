@@ -2,6 +2,7 @@ import { cart ,addToCart} from "../data/cart.js";
 import { products } from "../data/products.js";
 //import {addToCart}from "../data/cart.js";
 import { formatCurrency } from "./utils/money.js";
+
 let productsHTML = "";
 
 products.forEach((product) => {
@@ -76,6 +77,8 @@ cartQuantity= cartQuantity+cartItem.Quantity
     console.log(cartQuantity);
     console.log(cart);
 }
+
+
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
