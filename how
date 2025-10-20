@@ -1,0 +1,15 @@
+[33m149be48[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m save data and generate html for delivery options
+[33mab824cc[m updated the checkout header with js
+[33m1f699f8[m save cart in localstorage
+[33m221702c[m delete products fromm html when clicking delete
+[33m19b0901[m delete products from cart when clicking delete
+[33m2dd612a[m fixed price formating and radio selector
+[33m265ba57[m generate html for order summary
+[33m03e0897[m moveaddToCart in cart.js
+[33ma6d8332[m import products from products.js
+[33ma28e6a2[m use modules and import cart from  art.js
+[33meeaa055[m make the cart quantity interactive
+[33maa08bed[m make add to cart btn interactive
+[33mf45961e[m use products.js file
+[33md5d44ad[m generate HTML WITH jAVASCRIPT
+[33m8eae770[m add the starting files
