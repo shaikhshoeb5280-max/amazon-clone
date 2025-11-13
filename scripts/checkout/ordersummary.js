@@ -27,7 +27,6 @@ export function renderOrderSummary() {
       }
     });*/
 
-    console.log(matchingproduct);
 
     const deliveryOptionId = cartItem.deliveryOptionsId;
     const deliveryOption = getDeliveryOption(deliveryOptionId);

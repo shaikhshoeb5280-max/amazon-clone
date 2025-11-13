@@ -12,7 +12,7 @@ export function getProduct(productId) {
   return matchingproduct;
 }
 
-class Product {
+ export class Product {
   id;
   image;
   name;
@@ -36,7 +36,7 @@ class Product {
   }
 }
 
-class Clothing extends Product {
+ export class Clothing extends Product {
   sizeChartLink;
   constructor(productDetails) {
     super(productDetails);
@@ -71,6 +71,23 @@ const object3 ={
   }
 }
 object3.method()*/
+export class Appliance extends Product {
+ instructionLinks;
+ WarrantyLink;
+ constructor(productDetails){
+  super(productDetails)
+  this.instructionLinks = productDetails.instructionLinks;
+  this.WarrantyLink = productDetails.WarrantyLink;
+ }
+extraInfoHTML(){
+  return `<a href ="${this.instructionLinks}" target ="_blank">instructionLinks</a>
+   <a href ="${this.WarrantyLink}" target ="_blank">WarrantyLink</a>`
+  
+
+}
+ }
+
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -117,6 +134,9 @@ export const products = [
     },
     priceCents: 1899,
     keywords: ["toaster", "kitchen", "appliances"],
+    type:'appliance',
+    instructionLinks:"images/appliance-instructions.png",
+    WarrantyLink:"images/appliance-warranty.png",
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -251,6 +271,7 @@ export const products = [
     },
     priceCents: 3074,
     keywords: ["water boiler", "appliances", "kitchen"],
+    type:'appliance'
   },
   {
     id: "6b07d4e7-f540-454e-8a1e-363f25dbae7d",
@@ -464,6 +485,7 @@ export const products = [
     },
     priceCents: 2250,
     keywords: ["coffeemakers", "kitchen", "appliances"],
+    type:"appliance"
   },
   {
     id: "02e3a47e-dd68-467e-9f71-8bf6f723fdae",
@@ -508,6 +530,7 @@ export const products = [
     },
     priceCents: 10747,
     keywords: ["food blenders", "kitchen", "appliances"],
+    type: "appliance"
   },
   {
     id: "36c64692-677f-4f58-b5ec-0dc2cf109e27",
@@ -546,6 +569,11 @@ export const products = [
   if (productDetails.type === "clothing") {
     return new Clothing(productDetails);
   }
+  else if (productDetails.type==='appliance'){
+    return new Appliance(productDetails)
+  }
   return new Product(productDetails);
 });
-console.log(products);
+const applianceObjects = products.filter((p) => p instanceof Appliance);
+console.log(applianceObjects);
+
