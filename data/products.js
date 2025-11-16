@@ -12,7 +12,7 @@ export function getProduct(productId) {
   return matchingproduct;
 }
 
- export class Product {
+export class Product {
   id;
   image;
   name;
@@ -36,7 +36,7 @@ export function getProduct(productId) {
   }
 }
 
- export class Clothing extends Product {
+export class Clothing extends Product {
   sizeChartLink;
   constructor(productDetails) {
     super(productDetails);
@@ -72,22 +72,44 @@ const object3 ={
 }
 object3.method()*/
 export class Appliance extends Product {
- instructionLinks;
- WarrantyLink;
- constructor(productDetails){
-  super(productDetails)
-  this.instructionLinks = productDetails.instructionLinks;
-  this.WarrantyLink = productDetails.WarrantyLink;
- }
-extraInfoHTML(){
-  return `<a href ="${this.instructionLinks}" target ="_blank">instructionLinks</a>
-   <a href ="${this.WarrantyLink}" target ="_blank">WarrantyLink</a>`
-  
-
+  instructionLinks;
+  WarrantyLink;
+  constructor(productDetails) {
+    super(productDetails);
+    this.instructionLinks = productDetails.instructionLinks;
+    this.WarrantyLink = productDetails.WarrantyLink;
+  }
+  extraInfoHTML() {
+    return `<a href ="${this.instructionLinks}" target ="_blank">instructionLinks</a>
+   <a href ="${this.WarrantyLink}" target ="_blank">WarrantyLink</a>`;
+  }
 }
- }
+
+export let products = [];
+export function loadproducts(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load',()=>{
+   products = JSON.parse(xhr.response).map((productDetails) => {
+  if (productDetails.type === "clothing") {
+    return new Clothing(productDetails);
+  }
+  else if (productDetails.type==='appliance'){
+    return new Appliance(productDetails)
+  }
+  return new Product(productDetails);
+});
+
+console.log(' load products')
+fun()
+  })
+  xhr.open('GET','https://supersimplebackend.dev/products')
+  xhr.send()
+}
 
 
+
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -576,4 +598,4 @@ export const products = [
 });
 const applianceObjects = products.filter((p) => p instanceof Appliance);
 console.log(applianceObjects);
-
+*/

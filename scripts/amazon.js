@@ -1,12 +1,14 @@
-import { cart,addToCart } from "../data/cart.js";
-import { products ,} from "../data/products.js";
+import { cart, addToCart } from "../data/cart.js";
+import { products, loadproducts } from "../data/products.js";
 //import {addToCart}from "../data/cart.js";
-import { formatCurrency, } from "./utils/money.js";
+import { formatCurrency } from "./utils/money.js";
+loadproducts(renderProductsGrid);
 
-let productsHTML = "";
+function renderProductsGrid() {
+  let productsHTML = "";
 
-products.forEach((product) => {
-  productsHTML += `  <div class="product-container">
+  products.forEach((product) => {
+    productsHTML += `  <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
               src="${product.image}">
@@ -56,40 +58,31 @@ products.forEach((product) => {
           </button>
         </div>
 `;
-});
+  });
 
- 
+  function updateCartQuantity() {
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+      cartQuantity = cartQuantity + cartItem.Quantity;
+    });
 
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 
-function updateCartQuantity(){
-  let cartQuantity = 0
-    cart.forEach((cartItem)=>{
-
-cartQuantity= cartQuantity+cartItem.Quantity
-
-    })
-
-
-    document.querySelector('.js-cart-quantity').innerHTML=cartQuantity
-
-   
-  
     console.log(cartQuantity);
     console.log(cart);
-}
+  }
 
-updateCartQuantity()
+  updateCartQuantity();
 
-document.querySelector(".js-products-grid").innerHTML = productsHTML;
+  document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
+  document.querySelectorAll(".js-add-to-cart").forEach((buttonElement) => {
+    buttonElement.addEventListener("click", () => {
+      console.log("added a product");
+      const productId = buttonElement.dataset.productId;
 
-document.querySelectorAll(".js-add-to-cart").forEach((buttonElement) => {
-  buttonElement.addEventListener("click", () => {
-    console.log("added a product");
-    const productId = buttonElement.dataset.productId;
-
-addToCart(productId)
-    updateCartQuantity()
-
+      addToCart(productId);
+      updateCartQuantity();
+    });
   });
-});
+}
