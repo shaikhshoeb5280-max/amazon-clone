@@ -1,7 +1,7 @@
 import { renderOrderSummary,  } from "../../scripts/checkout/ordersummary.js";
 import { loadFromStorage,cart } from "../../data/cart.js";
 import { renderPaymentSummary } from "../../scripts/checkout/paymentsummary.js";
-import { loadproducts } from "../../data/products.js";
+import { loadproducts,loadProductsFetch } from "../../data/products.js";
 
 describe("test suite:renderOrdersummary", () => {
 
@@ -9,10 +9,10 @@ describe("test suite:renderOrdersummary", () => {
     const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
     
     beforeAll((done)=>{
-      loadproducts(()=>{
-
+      loadProductsFetch().then(()=>{
         done()
       })
+      
       
     })
   beforeEach(()=>{
