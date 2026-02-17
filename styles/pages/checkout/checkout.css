@@ -209,3 +209,30 @@
   margin-top: 11px;
   margin-bottom: 15px;
 }
+.empty-cart-full {
+  grid-column: 1 / -1;
+  min-height: 350px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  gap: 8px;
+
+  background: #fafafa;
+  border-radius: 12px;
+}
+
+.empty-cart-full p {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.empty-cart-full span {
+  font-size: 14px;
+  color: #777;
+}

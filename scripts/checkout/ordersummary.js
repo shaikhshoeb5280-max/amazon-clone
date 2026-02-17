@@ -14,7 +14,27 @@ import {
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentsummary.js";
 
+
+function updateCartQuantity(productId, newQuantity) {
+  const cartItem = cart.find(item => item.productId === productId);
+  if (!cartItem) return;
+
+  cartItem.Quantity = Number(newQuantity);
+}
+
 export function renderOrderSummary() {
+    const checkoutGrid = document.querySelector(".checkout-grid");
+   if(cart.length===0){
+      checkoutGrid.innerHTML = `
+      <div class="empty-cart-full">
+        <p>Your cart is empty</p>
+        <span>Add items to your cart to see them here</span>
+      </div>
+    `;
+    return;
+   }
+
+
   let cartSummary = "";
   cart.forEach((cartItem) => {
     const productId = cartItem.productId;
@@ -122,12 +142,40 @@ export function renderOrderSummary() {
   });
 
   document.querySelectorAll(".js-update-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      const { productId } = link.dataset;
-      console.log(productId);
-      document.querySelector(".cart-item-container");
-    });
+  link.addEventListener("click", () => {
+    const productId = link.dataset.productId;
+
+    const quantityContainer = document.querySelector(
+      ".js-product-quantity-" + productId
+    );
+
+    // stop if dropdown already exists
+    if (quantityContainer.querySelector("select")) return;
+
+    let selectHTML = '<select class="js-quantity-select">';
+
+    for (let i = 1; i <= 10; i++) {
+      selectHTML += `<option value="${i}">${i}</option>`;
+    }
+
+    selectHTML += "</select>";
+
+    quantityContainer.insertAdjacentHTML("beforeend", selectHTML);
+
+    
+const select = quantityContainer.querySelector(".js-quantity-select");
+
+// set current quantity as selected
+select.value = cart.find(item => item.productId === productId).Quantity;
+
+select.addEventListener("change", () => {
+  updateCartQuantity(productId, select.value);
+  renderOrderSummary();
+  renderPaymentSummary();
+});
+  
   });
+});
 
   document.querySelectorAll(".js-delivery-option").forEach((element) => {
     element.addEventListener("click", () => {
@@ -137,4 +185,10 @@ export function renderOrderSummary() {
       renderPaymentSummary();
     });
   });
+
+
+
+
+
 }
+

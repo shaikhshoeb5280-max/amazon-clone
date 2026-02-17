@@ -1,13 +1,14 @@
-import { cart, addToCart } from "../data/cart.js";
+import { cart, addToCart,updateCartQuantity } from "../data/cart.js";
 import { products, loadproducts } from "../data/products.js";
 //import {addToCart}from "../data/cart.js";
-import { formatCurrency } from "./utils/money.js";
+import { formatCurrency, } from "./utils/money.js";
+
 loadproducts(renderProductsGrid);
 
-function renderProductsGrid() {
+function renderProductsGrid(productsToRender = products) {
   let productsHTML = "";
 
-  products.forEach((product) => {
+  productsToRender.forEach((product) => {
     productsHTML += `  <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -31,7 +32,7 @@ function renderProductsGrid() {
           </div>
 
           <div class="product-quantity-container">
-            <select>
+            <select  class="js-quantity-selector" data-product-id="${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -60,17 +61,9 @@ function renderProductsGrid() {
 `;
   });
 
-  function updateCartQuantity() {
-    let cartQuantity = 0;
-    cart.forEach((cartItem) => {
-      cartQuantity = cartQuantity + cartItem.Quantity;
-    });
 
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-
-    console.log(cartQuantity);
-    console.log(cart);
-  }
+  
+ 
 
   updateCartQuantity();
 
@@ -80,9 +73,51 @@ function renderProductsGrid() {
     buttonElement.addEventListener("click", () => {
       console.log("added a product");
       const productId = buttonElement.dataset.productId;
+       const quantitySelector = document.querySelector(
+      `.js-quantity-selector[data-product-id="${productId}"]`
+    );
 
-      addToCart(productId);
+    const quantity = Number(quantitySelector.value);
+
+      addToCart(productId,quantity);
       updateCartQuantity();
+//reset the selector
+        quantitySelector.value = "1";
     });
   });
 }
+  function handleSearch() {
+  const searchInput = document.querySelector(".search-bar");
+  const searchValue = searchInput.value.trim().toLowerCase();
+
+  const filteredProducts = products.filter((product) =>
+    product.name?.toLowerCase().includes(searchValue)
+  );
+if(filteredProducts.length===0){
+ showMessage()
+  return
+}
+ renderProductsGrid(filteredProducts)
+}
+
+function showMessage(){
+ const error = document.querySelector(".js-products-grid")
+ error.innerHTML=   `<div class="no-products">
+      <p>No product found</p>
+        <span>Try adjusting your search or filters</span>
+    </div>
+  `
+ 
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+
+  document.querySelector(".search-button").addEventListener("click", handleSearch);
+  
+  document.querySelector(".search-bar").addEventListener("keydown",(e)=>{
+    if(e.key==="Enter") {
+      handleSearch();
+    }
+  })
+})

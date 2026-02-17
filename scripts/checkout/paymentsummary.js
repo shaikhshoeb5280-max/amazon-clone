@@ -1,10 +1,20 @@
-import { cart, totalItems} from "../../data/cart.js";
-import { getProduct } from "../../data/products.js";
+import { cart, totalItems,saveToStorage,updateCartQuantity} from "../../data/cart.js";
+import { getProduct, products } from "../../data/products.js";
+
 import { formatCurrency } from "../utils/money.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
+import { addOrder } from "../../data/orders.js";
+import { Car } from "../../data/car.js";
 
 export function renderPaymentSummary() {
   console.log("payment summary");
+
+   const paymentSummaryEl = document.querySelector(".js-payment-summary");
+
+  // ✅ stop function if element does not exist
+  if (!paymentSummaryEl || cart.length === 0) {
+    return;
+  }
 
   let productPriceCents = 0;
   let ShippingPriceCents = 0;
@@ -66,7 +76,37 @@ export function renderPaymentSummary() {
             Place your order
           </button>`;
   document.querySelector(".js-payment-summary").innerHTML = paymentSummaryHTML;
-  
-}
 
+document
+  .querySelector(".place-order-button")
+  .addEventListener("click", () => {
+
+    const order = {
+      id: crypto.randomUUID(),
+      orderTime: Date.now(),
+      totalCents: totalcents,
+      products: cart.map((cartItem) => {
+        return {
+          productId: cartItem.productId,
+          Quantity: cartItem.Quantity,
+          deliveryOptionsId: cartItem.deliveryOptionsId
+        };
+      })
+    };
+
+    addOrder(order);
+ cart.length = 0; // ✅ empties the array in-place
+saveToStorage();  // ✅ updates localStorage
+
+updateCartQuantity();
+    setTimeout(() => {
+      window.location.href = "orders.html";
+    }, 50);
+
+   
+  });
+
+
+
+}
 
