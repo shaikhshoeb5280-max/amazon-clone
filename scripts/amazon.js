@@ -1,9 +1,10 @@
 import { cart, addToCart,updateCartQuantity } from "../data/cart.js";
-import { products, loadproducts } from "../data/products.js";
+import { products, loadProducts } from "../data/products.js";
+import { ensureProductsLoaded } from "./utils/loadProducts.js";
 //import {addToCart}from "../data/cart.js";
 import { formatCurrency, } from "./utils/money.js";
 
-loadproducts(renderProductsGrid);
+ ensureProductsLoaded(renderProductsGrid)
 
 function renderProductsGrid(productsToRender = products) {
   let productsHTML = "";
@@ -121,3 +122,50 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
   })
 })
+
+document.addEventListener("DOMContentLoaded", () => {
+  const trigger = document.querySelector(".custom-sort-trigger");
+  const menu = document.querySelector(".custom-sort-menu");
+  const valueText = document.querySelector(".custom-sort-value");
+
+  trigger.addEventListener("click", () => {
+    trigger.parentElement.classList.toggle("open");
+  });
+
+  menu.addEventListener("click", (e) => {
+    if (!e.target.dataset.value) return;
+
+    const value = e.target.dataset.value;
+    valueText.textContent = e.target.textContent;
+
+    trigger.parentElement.classList.remove("open");
+
+    let sortedProducts = [...products];
+
+    switch (value) {
+      case "price-low":
+        sortedProducts.sort((a, b) => a.priceCents - b.priceCents);
+        break;
+
+      case "price-high":
+        sortedProducts.sort((a, b) => b.priceCents - a.priceCents);
+        break;
+
+      case "rating":
+        sortedProducts.sort((a, b) => b.rating.stars - a.rating.stars);
+        break;
+
+      default:
+        sortedProducts = [...products];
+    }
+
+    renderProductsGrid(sortedProducts);
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!trigger.contains(e.target) && !menu.contains(e.target)) {
+      trigger.parentElement.classList.remove("open");
+    }
+  });
+});

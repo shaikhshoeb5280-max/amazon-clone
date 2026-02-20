@@ -37,7 +37,7 @@ if (!cart) {
   }
 
 
-export function addToCart(productId,quantity) {
+export function addToCart(productId,quantity=1) {
   let matchingItem;
   cart.forEach((cartItem) => {
     if (productId === cartItem.productId) {
@@ -95,15 +95,20 @@ export function totalItems() {
   return checkoutquantity
  
 }
-export function loadCart(fun) {
-  const xhr = new XMLHttpRequest();
+export async function loadCart() {
+  try {
+    const response = await fetch('https://supersimplebackend.dev/cart');
 
-  xhr.addEventListener('load',()=>{
-  console.log(xhr.response)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
+    const data = await response.text();
+    console.log(data);
 
-fun()
-  })
-  xhr.open('GET','https://supersimplebackend.dev/cart')
-  xhr.send()
+    return data; // returns the cart data for further use
+  } catch (error) {
+    console.error('Failed to load cart:', error);
+    return null; // in case of error
+  }
 }

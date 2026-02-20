@@ -1,31 +1,27 @@
 import { renderOrderSummary } from "./checkout/ordersummary.js";
 import { renderPaymentSummary } from "./checkout/paymentsummary.js";
 import { checkoutItems } from "../data/cart.js";
-import { loadproducts,loadProductsFetch } from "../data/products.js";
+import { loadProducts, } from "../data/products.js";
 import { loadCart,cart } from "../data/cart.js";
 //import '../data/cart-class.js'
 //import { Car } from "../data/car.js";
 //import '../data/backend-practice.js'
 
-async function loadPage(){
- 
-  await loadProductsFetch()
-    await new Promise((resolve) => {
-    loadCart(() => {
-      resolve();
-    });
-  })
+async function loadPage() {
+  await loadProducts(); // wait until products are loaded
+  await loadCart();     // wait until cart is loaded
 
+  checkoutItems();
+  renderOrderSummary();
 
-   checkoutItems();
-    renderOrderSummary();
-    // ✅ only render payment summary if cart has items
   if (cart.length > 0) {
     renderPaymentSummary();
   }
-  
 }
-loadPage()
+
+loadPage();
+
+
 
 /*
 Promise.all([

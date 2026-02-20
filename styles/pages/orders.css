@@ -1,3 +1,11 @@
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+}
 .main {
   max-width: 850px;
   margin-top: 90px;
@@ -23,6 +31,9 @@
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 50px;
+  width: 100%;
+  max-width: 100%;
+ 
 }
 
 .order-header {
@@ -86,7 +97,7 @@
 }
 
 .order-details-grid {
-  padding: 40px 25px;
+  padding: 50px 25px;
   border: 1px solid rgb(213, 217, 217);
   border-top: none;
   border-bottom-left-radius: 8px;
@@ -219,7 +230,7 @@
   }
 }
 .empty-orders {
-  min-height: 350px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -246,11 +257,35 @@
   font-size: 14px;
   color: #777;
 }
-.clear{
-  background-color: rgb(254, 189, 105);
-  border: none;
-  width: 45px;
-  height: 40px;
-  border-radius: 4px;
-  flex-shrink: 0;
+.reset-filters-btn {
+  height: 36px;
+  padding: 0 14px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  background-color: #f3f3f3;
+  color: #0f1111;
+
+  border: 1px solid #d5d9d9;
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
+/* Hover */
+.reset-filters-btn:hover {
+  background-color: #e7e7e7;
+  border-color: #bfc4c4;
+}
+
+

@@ -147,3 +147,85 @@
   width: 26px;
   text-align: center;
 }
+.amazon-sort-bar {
+  position: fixed;
+  top: 60px; /* directly below header */
+  left: 0;
+  right: 0;
+  height: 45px;
+
+  background-color: white;
+  border-bottom: 1px solid rgb(221, 221, 221);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding-left: 15px;
+  padding-right: 15px;
+
+  z-index: 99;
+}
+
+.amazon-sort-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sort-label {
+  font-size: 14px;
+  color: rgb(15, 17, 17);
+}
+
+.custom-sort {
+  position: relative;
+}
+
+.custom-sort-trigger {
+  height: 32px;
+  padding: 4px 12px;
+  font-size: 14px;
+  background: white;
+  border: 1px solid rgb(213, 217, 217);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.custom-sort-trigger:hover {
+  border-color: rgb(240, 136, 4);
+}
+
+.custom-sort-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+
+  width: 200px;
+  background: white;
+  border: 1px solid rgb(213, 217, 217);
+  border-radius: 6px;
+
+  list-style: none;
+  padding: 6px 0;
+  margin: 0;
+
+  display: none;
+  z-index: 999;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.custom-sort-menu li {
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.custom-sort-menu li:hover {
+  background-color: rgb(247, 248, 248);
+}
+
+/* Open state */
+.custom-sort.open .custom-sort-menu {
+  display: block;
+}

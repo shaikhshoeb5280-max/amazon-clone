@@ -1,15 +1,14 @@
 import { orders, clearOrders } from "../../data/orders.js";
-import { loadproducts } from "../data/products.js";
+import { loadProducts } from "../data/products.js";
 import { products,getProduct } from "../data/products.js";
 import { formatCurrency, } from "./utils/money.js";
-import { cart } from "../data/cart.js";
+import { cart ,addToCart} from "../data/cart.js";
 import { calculateDeliveryDate,getDeliveryOption } from "../data/deliveryOptions.js";
+import { ensureProductsLoaded } from "./utils/loadProducts.js";
+
+ensureProductsLoaded(renderOrdersPage)
 
 
-
-loadproducts(() => {
-  renderOrdersPage(); // only runs AFTER products are loaded
-});
  function updateCartQuantity() {
     let cartQuantity = 0;
     cart.forEach((cartItem) => {
@@ -27,6 +26,13 @@ loadproducts(() => {
 
   updateCartQuantity();
 function renderOrdersPage() {
+  if(!orders||orders.length===0){
+       document.querySelector(".orders-grid").innerHTML=`<div class="empty-orders">
+  <p>You have no orders yet</p>
+  <span>Your orders will appear here once you place one</span>
+</div>`
+return
+  }
   let ordersHTML = "";
   
   orders.forEach((order) => {
@@ -50,7 +56,8 @@ const dateString = calculateDeliveryDate(deliveryOption);
             Arriving on: ${dateString}
           </div>
           <div class="product-quantity">Quantity: ${orderItem.Quantity}</div>
-          <button class="buy-again-button button-primary">
+          <button class="buy-again-button button-primary js-buy-again"
+      data-product-id="${orderItem.productId}">
             <img class="buy-again-icon" src="images/icons/buy-again.png">
             <span class="buy-again-message">Buy it again</span>
           </button>
@@ -94,16 +101,20 @@ const dateString = calculateDeliveryDate(deliveryOption);
   });
 
   document.querySelector(".orders-grid").innerHTML = ordersHTML;
+  document.querySelectorAll('.js-buy-again').forEach((button)=>{
+  button.addEventListener("click",()=>{
+    const productId = button.dataset.productId
+   addToCart(productId)
+    window.location.href="checkout.html"
+  })
+})
 }
 
 document.querySelector('.js-clear').addEventListener("click",()=>{
   clearOrders()
 
-  const message =  document.querySelector(".orders-grid")
-
-message.innerHTML=`<div class="empty-orders">
-  <p>You have no orders yet</p>
-  <span>Your orders will appear here once you place one</span>
-</div>`
+ renderOrdersPage()
 })
+
+
 
