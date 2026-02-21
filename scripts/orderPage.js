@@ -2,24 +2,13 @@ import { orders, clearOrders } from "../../data/orders.js";
 import { loadProducts } from "../data/products.js";
 import { products,getProduct } from "../data/products.js";
 import { formatCurrency, } from "./utils/money.js";
-import { cart ,addToCart} from "../data/cart.js";
+import { cart ,addToCart,updateCartQuantity} from "../data/cart.js";
 import { calculateDeliveryDate,getDeliveryOption } from "../data/deliveryOptions.js";
 import { ensureProductsLoaded } from "./utils/loadProducts.js";
 
 ensureProductsLoaded(renderOrdersPage)
 
 
- function updateCartQuantity() {
-    let cartQuantity = 0;
-    cart.forEach((cartItem) => {
-      cartQuantity = cartQuantity + cartItem.Quantity;
-    });
-
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-
-    console.log(cartQuantity);
-    console.log(cart);
-  }
 
   
  

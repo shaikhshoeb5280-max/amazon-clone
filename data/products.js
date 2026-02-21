@@ -108,7 +108,7 @@ export async function loadProducts() {
       return new Product(productDetails);
     });
 
-    console.log("Products loaded");
+   // console.log("Products loaded");
   } catch (error) {
     console.error("Failed to load products:", error);
   }

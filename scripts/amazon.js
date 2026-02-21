@@ -72,7 +72,7 @@ function renderProductsGrid(productsToRender = products) {
 
   document.querySelectorAll(".js-add-to-cart").forEach((buttonElement) => {
     buttonElement.addEventListener("click", () => {
-      console.log("added a product");
+      //console.log("added a product");
       const productId = buttonElement.dataset.productId;
        const quantitySelector = document.querySelector(
       `.js-quantity-selector[data-product-id="${productId}"]`

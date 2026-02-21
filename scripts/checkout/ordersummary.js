@@ -3,6 +3,8 @@ import {
   removeFromCart,
   updateDeliveryOption,
   checkoutItems,
+  
+  
 } from "../../data/cart.js";
 import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
@@ -15,7 +17,7 @@ import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentsummary.js";
 
 
-function updateCartQuantity(productId, newQuantity) {
+function updateCheckoutQuantity(productId, newQuantity) {
   const cartItem = cart.find(item => item.productId === productId);
   if (!cartItem) return;
 
@@ -169,7 +171,7 @@ const select = quantityContainer.querySelector(".js-quantity-select");
 select.value = cart.find(item => item.productId === productId).Quantity;
 
 select.addEventListener("change", () => {
-  updateCartQuantity(productId, select.value);
+  updateCheckoutQuantity(productId, select.value);
   renderOrderSummary();
   renderPaymentSummary();
 });

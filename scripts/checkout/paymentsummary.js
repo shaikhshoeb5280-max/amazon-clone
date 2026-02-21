@@ -4,10 +4,10 @@ import { getProduct, products } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { addOrder } from "../../data/orders.js";
-import { Car } from "../../data/car.js";
+
 
 export function renderPaymentSummary() {
-  console.log("payment summary");
+  //console.log("payment summary");
 
    const paymentSummaryEl = document.querySelector(".js-payment-summary");
 
@@ -28,11 +28,11 @@ export function renderPaymentSummary() {
   const totalBeforeTaxCents = productPriceCents + ShippingPriceCents;
   const taxCents = totalBeforeTaxCents * 0.1;
   const totalcents = totalBeforeTaxCents + taxCents;
-  console.log(productPriceCents);
-  console.log(ShippingPriceCents);
-  console.log(totalBeforeTaxCents);
-  console.log(taxCents);
-  console.log(totalcents);
+  //console.log(productPriceCents);
+  //console.log(ShippingPriceCents);
+  //console.log(totalBeforeTaxCents);
+  //console.log(taxCents);
+  //console.log(totalcents);
 
   const paymentSummaryHTML = `  <div class="payment-summary-title">
             Order Summary
