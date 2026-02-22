@@ -1,5 +1,5 @@
 import { orders, clearOrders } from "../../data/orders.js";
-import { loadProducts } from "../data/products.js";
+
 import { products,getProduct } from "../data/products.js";
 import { formatCurrency, } from "./utils/money.js";
 import { cart ,addToCart,updateCartQuantity} from "../data/cart.js";
@@ -53,8 +53,8 @@ const dateString = calculateDeliveryDate(deliveryOption);
         </div>
 
         <div class="product-actions">
-          <a href="tracking.html">
-            <button class="track-package-button button-secondary">
+          <a href="tracking.html?orderId=${order.id}&productId=${orderItem.productId}">
+            <button class="track-package-button button-secondary" data-product-id="${orderItem.productId}">
               Track package
             </button>
           </a>

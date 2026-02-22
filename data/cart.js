@@ -1,4 +1,4 @@
-import { renderPaymentSummary } from "../scripts/checkout/paymentsummary.js";
+
 
 export let cart ;
 loadFromStorage()
