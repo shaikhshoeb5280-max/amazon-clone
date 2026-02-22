@@ -1,4 +1,4 @@
-import { orders, clearOrders } from "../../data/orders.js";
+import { orders, clearOrders } from "../data/orders.js";
 
 import { products,getProduct } from "../data/products.js";
 import { formatCurrency, } from "./utils/money.js";
