@@ -3,7 +3,7 @@ import {
   removeFromCart,
   updateDeliveryOption,
   checkoutItems,
-  
+  saveToStorage
   
 } from "../../data/cart.js";
 import { products, getProduct } from "../../data/products.js";
@@ -22,6 +22,7 @@ function updateCheckoutQuantity(productId, newQuantity) {
   if (!cartItem) return;
 
   cartItem.Quantity = Number(newQuantity);
+  saveToStorage()
 }
 
 export function renderOrderSummary() {
