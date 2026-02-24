@@ -1,9 +1,9 @@
-import { orders } from "../../data/orders.js";
-import { getProduct, loadProducts } from "../../data/products.js";
+import { orders } from "../data/orders.js";
+import { getProduct, loadProducts } from "../data/products.js";
 import {
   calculateDeliveryDate,
   getDeliveryOption
-} from "../../data/deliveryOptions.js";
+} from "../data/deliveryOptions.js";
 import { updateCartQuantity } from "../data/cart.js";
 import { ensureProductsLoaded } from "./utils/loadProducts.js";
 
