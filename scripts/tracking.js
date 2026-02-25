@@ -1,5 +1,5 @@
 import { orders } from "../data/orders.js";
-import { getProduct, loadProducts } from "../data/products.js";
+import { getProduct, loadProducts, products } from "../data/products.js";
 import {
   calculateDeliveryDate,
   getDeliveryOption
@@ -11,21 +11,22 @@ const params = new URLSearchParams(window.location.search);
 const orderId = params.get("orderId");
 const productId = params.get("productId");
 
-
 ensureProductsLoaded(renderTrackingpage)
 updateCartQuantity()
+
 
 function renderTrackingpage(){
 
 let trackingHTML = "";
 
 orders.forEach(order => {
-  if (order.id !== orderId) return;
+if (order.id !== orderId) return;
 
   order.products.forEach(orderItem => {
     if (orderItem.productId !== productId) return;
 
     const product = getProduct(orderItem.productId);
+    
     if (!product) return;
 
     const deliveryOption = getDeliveryOption(orderItem.deliveryOptionsId);
@@ -33,7 +34,7 @@ orders.forEach(order => {
 
     trackingHTML = `
       <div class="order-tracking">
-        <a class="back-to-orders-link link-primary" href="orders.html">
+        <a class="back-to-orders-link link-primary" href="demo-orders.html">
           View all orders
         </a>
 

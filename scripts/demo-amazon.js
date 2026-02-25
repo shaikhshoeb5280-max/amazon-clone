@@ -1,4 +1,4 @@
-import { cart, addToCart,updateCartQuantity } from "../data/cart.js";
+import { cart, addToCart,updateCartQuantity ,loadFromStorage} from "../data/cart.js";
 import { products, loadProducts } from "../data/products.js";
 import { ensureProductsLoaded } from "./utils/loadProducts.js";
 //import {addToCart}from "../data/cart.js";
