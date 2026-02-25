@@ -169,3 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+window.addEventListener("pageshow", () => {
+  loadFromStorage();
+  updateCartQuantity();
+});

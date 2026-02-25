@@ -100,7 +100,7 @@ saveToStorage();  // ✅ updates localStorage
 
 updateCartQuantity();
     setTimeout(() => {
-      window.location.href = "orders.html";
+      window.location.href = "demo-orders.html";
     }, 50);
 
    
@@ -109,4 +109,5 @@ updateCartQuantity();
 
 
 }
+
 

@@ -53,7 +53,7 @@ const dateString = calculateDeliveryDate(deliveryOption);
         </div>
 
         <div class="product-actions">
-          <a href="tracking.html?orderId=${order.id}&productId=${orderItem.productId}">
+          <a href="demo-tracking.html?orderId=${order.id}&productId=${orderItem.productId}">
             <button class="track-package-button button-secondary" data-product-id="${orderItem.productId}">
               Track package
             </button>
@@ -94,7 +94,7 @@ const dateString = calculateDeliveryDate(deliveryOption);
   button.addEventListener("click",()=>{
     const productId = button.dataset.productId
    addToCart(productId)
-    window.location.href="checkout.html"
+    window.location.href="demo-checkout.html"
   })
 })
 }

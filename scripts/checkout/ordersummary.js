@@ -194,4 +194,10 @@ select.addEventListener("change", () => {
 
 
 }
-
+window.addEventListener("pageshow", (event) => {
+  // Re-render when coming from bfcache (Back button)
+  if (event.persisted) {
+    renderOrderSummary();
+    checkoutItems();
+  }
+});
