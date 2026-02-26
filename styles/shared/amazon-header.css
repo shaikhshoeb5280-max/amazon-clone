@@ -69,14 +69,7 @@
   }
 
   .search-button {
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
-  }
-
-  .search-icon {
-    height: 18px;
-    margin-left: 1px;
+    display: none;
   }
 }
 
