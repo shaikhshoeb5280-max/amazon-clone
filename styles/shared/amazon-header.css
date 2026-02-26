@@ -57,6 +57,27 @@
     height: 35px;
     margin-top: 5px;
   }
+   .amazon-header-middle-section {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .search-bar {
+    font-size: 14px;
+    height: 34px;
+    padding-left: 8px;
+  }
+
+  .search-button {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .search-icon {
+    height: 18px;
+    margin-left: 1px;
+  }
 }
 
 .amazon-header-middle-section {

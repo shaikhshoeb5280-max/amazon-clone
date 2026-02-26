@@ -24,28 +24,23 @@ if (!cart) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-  export function updateCartQuantity({productId,newQuantity}={}) {
-    if(productId && newQuantity !==undefined){
-      const cartItem = cart.find((item)=>{
-        return item.productId === productId
-        if(cartItem){
-          cartItem.Quantity= Number(newQuantity)
-        }
-      })
-
+ // ✅ Fixed
+export function updateCartQuantity({productId, newQuantity}={}) {
+  if(productId && newQuantity !== undefined){
+    const cartItem = cart.find((item) => item.productId === productId);
+    if(cartItem){
+      cartItem.Quantity = Number(newQuantity);
+      saveToStorage(); // ← also add this so the change persists!
     }
-    let cartQuantity = 0;
-    cart.forEach((cartItem) => {
-      cartQuantity = cartQuantity + cartItem.Quantity;
-    });
-
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-    
-
-    //console.log(cartQuantity);
-    //console.log(cart);
   }
 
+  let cartQuantity = 0;
+  cart.forEach((cartItem) => {
+    cartQuantity = cartQuantity + cartItem.Quantity;
+  });
+
+  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+}
 
 export function addToCart(productId,quantity=1) {
   let matchingItem;
